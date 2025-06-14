@@ -1,0 +1,92 @@
+<div class="container">
+  @if (!formSent){
+  <form
+    class="register"
+    #form="ngForm"
+    (ngSubmit)="register(email.value, password.value, name.value)"
+  >
+    <fieldset class="register--fieldset">
+      <h2 class="register--title">Register</h2>
+      <div class="register--field field-icon">
+        <label for="email"
+          ><span><i class="fas fa-envelope"></i></span
+        ></label>
+        <input
+          class="input-error"
+          type="email"
+          name="email"
+          id="email"
+          class="register--input"
+          placeholder="john.doe@gmail.com"
+          ngModel
+          required
+          #email="ngModel"
+        />
+      </div>
+      @if (email?.touched){ @if (email?.errors?.['required']){
+      <p class="error">Email is required!</p>
+      } @if (email?.errors?.['emailValidator']){
+      <p class="error">Email is not valid!</p>
+      } }
+
+      <!-- User name -->
+      <div class="register--field field-icon">
+        <label for="name"
+          ><span><i class="fas fa-envelope"></i></span
+        ></label>
+        <input
+          class="input-error"
+          type="text"
+          name="name"
+          id="name"
+          class="register--input"
+          placeholder="name"
+          ngModel
+          required
+          #name="ngModel"
+          minlength="5"
+        />
+      </div>
+      @if (name?.touched){ @if (name?.errors?.['required']){
+      <p class="error">Email is required!</p>
+      } @if (name?.errors?.['minlength']){
+      <p class="error">Email is not valid!</p>
+      } }
+
+      <div class="register--field field-icon">
+        <label for="password"
+          ><span><i class="fas fa-lock"></i></span
+        ></label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="register--input"
+          placeholder="******"
+          minlength="5"
+          ngModel
+          #password="ngModel"
+          required
+        />
+      </div>
+      @if (password?.touched){ @if (password?.errors?.['required']) {
+      <p class="error">Password is required!</p>
+      } @if (password?.errors?.['minlength']){
+      <p class="error">Password must be at least 4 characters!</p>
+      } }
+
+      <button class="primary-button form-button">Create</button>
+    </fieldset>
+  </form>
+  <p class="text-center">
+    Already have an account?
+    <button class="primary-button" (click)="onClickBack()">
+      Back to login
+    </button>
+  </p>
+  } @if (formSent){ @if (success){
+  <p>Your user is created. <a href="/authentication">LogIn</a></p>
+  } @else {
+  <p>Se ha producido un error</p>
+  } }
+</div>

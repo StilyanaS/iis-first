@@ -1,0 +1,8 @@
+<p>You can:</p>
+<div class="buttons-container">
+  <button class="primary-button">Create a post</button>
+  @if (isAdmin){
+  <button class="primary-button" (click)="modifyUsers()">Modify users</button>
+  }
+  <button class="primary-button" (click)="logout()">Logout</button>
+</div>

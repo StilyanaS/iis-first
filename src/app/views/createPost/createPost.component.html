@@ -1,0 +1,56 @@
+<form
+  class="post"
+  #form="ngForm"
+  (ngSubmit)="addPost(title.value, content.value)"
+>
+  <fieldset class="post--fieldset">
+    <h2 class="post--title">Post to add</h2>
+    <div class="post--field vertical-flex">
+      <label for="title">Title:</label>
+      <input
+        class="input-error"
+        type="text"
+        name="title"
+        id="title"
+        class="title--input"
+        ngModel
+        required
+        #title="ngModel"
+      />
+    </div>
+    @if (title?.touched){ @if (title?.errors?.['required']){
+    <p class="error">title is required!</p>
+    } @if (title?.errors?.['titleValidator']){
+    <p class="error">title is not valid!</p>
+    } }
+    <div class="post--field vertical-flex">
+      <label for="img">Image url:</label>
+      <input
+        type="text"
+        name="img"
+        id="img"
+        class="img--input"
+        ngModel
+        #img="ngModel"
+      />
+    </div>
+    <div class="post--field post--content">
+      <label for="password"><span>Post content</span></label>
+      <textarea
+        name="content"
+        id="content"
+        rows="25"
+        cols="85"
+        class="content--input"
+        placeholder="Your post content goes here"
+        ngModel
+        #content="ngModel"
+        required
+      ></textarea>
+    </div>
+    @if (content?.touched){ @if (content?.errors?.['required']) {
+    <p class="error">Content is required!</p>
+    } }
+    <button class="primary-button post--button">Post it</button>
+  </fieldset>
+</form>

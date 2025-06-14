@@ -1,0 +1,15 @@
+<div class="posts-section__container container">
+  @for (post of posts; track $index){
+  <div class="posts-section__item" (click)="postClick($index)">
+    <a [routerLink]="[post.id]">
+      <div class="posts-section__img">
+        <img src="{{ post.img }}" alt="" />
+      </div>
+      <div class="posts-section__info">
+        <h2 class="posts-section__title">{{ post.title }}</h2>
+        <p class="posts-section__content">{{ post.description }}</p>
+      </div>
+    </a>
+  </div>
+  }
+</div>

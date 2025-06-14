@@ -1,0 +1,13 @@
+<div class="posts-section__container container">
+  @if (post){
+  <div class="posts-section__item">
+    <div class="posts-section__img">
+      <img src="{{ post.img }}" alt="" />
+    </div>
+    <div class="posts-section__info">
+      <h2 class="posts-section__title">{{ post.title }}</h2>
+      <p class="posts-section__content">{{ post.content }}</p>
+    </div>
+  </div>
+  }
+</div>

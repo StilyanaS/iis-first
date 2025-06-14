@@ -1,0 +1,62 @@
+<div class="service-section__container container">
+  @for (service of services; track $index){
+  <div class="service-section__item">
+    <div class="service-section__img">
+      <img src="{{ service.image }}" alt="" />
+    </div>
+    <div class="service-section__info">
+      <h2>
+        {{ service.title }}
+      </h2>
+      <div class="service-section__subitem">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="service-section__svg"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <div class="service-section__text">{{ service.service }}</div>
+      </div>
+      <div class="service-section__subitem">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="service-section__svg"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <div class="service-section__text">{{ service.service2 }}</div>
+      </div>
+      <div class="service-section__subitem">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="service-section__svg"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <div class="service-section__text">{{ service.service3 }}</div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

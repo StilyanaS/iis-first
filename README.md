@@ -1,27 +1,44 @@
-# IisProject
+# Angular Project Documentation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+## Structure Overview
 
-## Development server
+### Components
+- `src/app/app.component.ts`
+- `src/app/components/banner/banner.component.ts`
+- `src/app/components/footer/footer.component.ts`
+- `src/app/components/header/header.component.ts`
+- `src/app/components/login/login.component.ts`
+- `src/app/components/logo-carousel/logo-carousel.component.ts`
+- `src/app/components/posts-section/posts-section.component.ts`
+- `src/app/components/profile-actions/profile-actions.component.ts`
+- `src/app/components/profile-data/profile-data.component.ts`
+- `src/app/components/register/register.component.ts`
+- `src/app/components/service-section/service-section.component.ts`
+- `src/app/components/single-post/single-post.component.ts`
+- `src/app/components/users-list/users-list.component.ts`
+- `src/app/views/createPost/createPost.component.ts`
+- `src/app/views/error/error.component.ts`
+- `src/app/views/home/home.component.ts`
+- `src/app/views/posts/posts.component.ts`
+- `src/app/views/profile/profile.component.ts`
+- `src/app/views/user-auth/user-auth.component.ts`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Others
+- `src/app/app.config.ts`
+- `src/app/app.routes.ts`
+- `src/app/components/login/login-user.interface.ts`
+- `src/app/components/posts-section/posts-section.interface.ts`
+- `src/app/components/register/user-register.interface.ts`
+- `src/app/components/service-section/section-service.interface.ts`
+- `src/app/components/single-post/single-post.interface.ts`
+- `src/app/guards/user.guard.ts`
+- `src/app/interceptors/app.interceptor.ts`
 
-## Code scaffolding
+### Services
+- `src/app/components/posts-section/posts-section.service.ts`
+- `src/app/components/service-section/service-section.service.ts`
+- `src/app/components/single-post/single-post.service.ts`
+- `src/app/services/auth-check.service.ts`
+- `src/app/services/firebaseConnection.service.ts`
+- `src/app/services/local-storage.service.ts`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

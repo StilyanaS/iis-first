@@ -1,0 +1,29 @@
+<div class="users-title">
+  <h3>Available users</h3>
+</div>
+<div class="users-list">
+  @if (users){ @for (user of users; track $index){
+  <div class="user" id="user-{{ $index }}">
+    <input
+      class="user-name"
+      value="{{ user.name }}"
+      readonly
+      (focusout)="onFocusOut($event, $index)"
+    />
+    <input
+      class="user-email"
+      value="{{ user.email }}"
+      readonly
+      (focusout)="onFocusOut($event, $index)"
+    />
+    <div class="user__action-buttons">
+      <button class="primary-button" (click)="modifyUser($event)">
+        Modify
+      </button>
+      <button class="primary-button" (click)="deleteUser($index)">
+        Delete
+      </button>
+    </div>
+  </div>
+  } }
+</div>

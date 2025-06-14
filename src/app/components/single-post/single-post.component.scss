@@ -1,0 +1,25 @@
+.posts-section{
+  &__container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 50%;
+  }
+  &__title {
+    display: flex;
+    gap: 1rem;
+  }
+  &__content {
+    max-width: 90%;
+    max-height: 2.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+}

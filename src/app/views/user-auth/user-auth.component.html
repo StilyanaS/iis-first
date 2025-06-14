@@ -1,0 +1,7 @@
+<div class="authentication">
+  @if(registerClicked()){
+  <app-register (backClicked)="showLogin($event)"></app-register>
+  } @else {
+  <app-login (registerClick)="showForm($event)"></app-login>
+  }
+</div>

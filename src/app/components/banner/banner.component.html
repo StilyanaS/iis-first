@@ -1,0 +1,45 @@
+@if(imgUrl){
+<div class="banner-container container">
+  <div class="banner__subscription-container">
+    <div class="banner__subscription-title">
+      <h1 class="gradient-text">
+        Leveraging software to unlock the full potential of industrial
+        operations
+      </h1>
+    </div>
+    <div class="banner__subscription-description">
+      The production optimization is our priority and we strongly believe that
+      it has to be completely personalized and based on bussiness needs.
+    </div>
+    <div class="banner__subscription-form">
+      <form action="">
+        <input
+          type="email"
+          placeholder="Type your email adress"
+          class="banner__subscription-input"
+        />
+        <button
+          type="button"
+          class="banner__subscription-button"
+          (click)="saveContact()"
+        >
+          Let's talk
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="banner__img-container">
+    @if (!loaded){
+    <div class="banner__placeholder"></div>
+    }
+    <img
+      src="{{ imgUrl }}"
+      loading="lazy"
+      (load)="onImageLoad()"
+      [class.loaded]="loaded"
+      class="img-banner"
+      alt="robot"
+    />
+  </div>
+</div>
+}

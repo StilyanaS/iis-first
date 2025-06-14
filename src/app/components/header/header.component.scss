@@ -1,0 +1,43 @@
+.nav {
+    &-container {
+
+      display: flex;
+      justify-content: space-between;
+      background: radial-gradient(circle at 3% 25%,#002853 0,#040c18 25%);
+      padding: .2rem 1rem;
+    }
+
+    &-links__container {
+      all:unset;
+      display: flex;
+      list-style-type: none;
+      gap: 1rem;
+      font-family: "Nunito Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 200;
+      color: #eee;
+      li {
+        display: flex;
+        align-items: center;
+        padding: .4rem;
+      }
+
+      li:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-links {
+      display: flex;
+      align-items: center;
+    }
+    &-links__phone {
+    background-color: #18C5CCEE;
+    outline: none;
+    border: 1px solid #18C5CCEE;
+    border-radius: 5px;
+    color: #000;
+    padding: .2rem;
+    }
+}
+

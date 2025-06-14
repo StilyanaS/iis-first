@@ -1,1 +1,112 @@
-/* You can add global styles to this file, and also import other style files */
+ body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+  color: #eee;
+  }
+
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+}
+::view-transition-old(root){
+  animation: fadeOut 3s ease-in-out forwards;
+  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+}
+
+::view-transition-new(root){
+  //animation: fadeIn 2s ease-in-out forwards;
+}
+.main-content {
+  background: radial-gradient(circle at 3% 25%,#002853 0,#040c18 25%);
+  padding: 1rem;
+}
+.footer-content {
+  display: flex;
+  padding: 1rem;
+  background: radial-gradient(circle at 3% 25%,#002853 0,#040c18 25%);
+}
+.gradient-text {
+  -webkit-text-fill-color: transparent;
+    background: linear-gradient(89.97deg, #00c4cc 1.84%, #d9d9d9 102.67%);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+h1 {
+    font-size: 62px;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 75px;
+}
+
+h2 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 55px;
+}
+
+a {
+  color: #18C5CCEE;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+ // U T I L I T Y  C L A S S E S
+
+.primary-button {
+    background-color: #18C5CCEE;
+    outline: none;
+    border: 1px solid #18C5CCEE;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+}
+
+.form-button {
+    width: 200px;
+    height: 50px;
+    padding: .2rem;
+    font-size: 1rem;
+    margin: 1rem auto
+}
+
+.vertical-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  to {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
