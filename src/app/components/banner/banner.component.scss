@@ -12,8 +12,12 @@
     align-items: center;
     justify-content: center;
     color: #eee;
+    gap: 1rem;
+    margin-top: 1rem;
 
     @media screen and (min-width: 960px) {
+      gap: 0;
+      margin-top: 0;
       max-width: 50%;
     }
   }
@@ -26,6 +30,10 @@
   &__subscription-form {
     width: 100%;
     margin-top: 2rem;
+  }
+
+  &__subscription-form-container {
+    display: flex;
   }
 
   &__subscription-input {
@@ -67,6 +75,13 @@
   .loaded {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
+  }
+
+  &__img-container {
+    max-width: 100%;
+    img {
+      max-width: 100%;
+    }
   }
 }
 

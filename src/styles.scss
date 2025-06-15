@@ -41,10 +41,14 @@
 }
 
 h1 {
-    font-size: 62px;
+    font-size: 22px;
     font-weight: 800;
     letter-spacing: -.04em;
-    line-height: 75px;
+    line-height: 35px;
+    @media screen and (max-width: 768px) {
+        font-size: 62px;
+        line-height: 75px;
+    }
 }
 
 h2 {
