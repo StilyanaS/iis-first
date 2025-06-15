@@ -21,7 +21,8 @@
 }
 
 ::view-transition-new(root){
-  //animation: fadeIn 2s ease-in-out forwards;
+  animation: fadeIn 3s ease-in-out forwards;
+  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
 }
 .main-content {
   background: radial-gradient(circle at 3% 25%,#002853 0,#040c18 25%);
@@ -108,5 +109,13 @@ a {
   to {
     opacity: 0;
     filter: blur(10px);
+  }
+}
+
+
+.flex-wrap {
+  flex-wrap: wrap;
+  @media only screen and (min-width: 960px) {
+    flex-wrap: nowrap;
   }
 }

@@ -10,6 +10,7 @@
   &__item {
     display: flex;
     gap: 3rem;
+    flex-wrap: wrap;
     margin-top: 2rem;
   }
   &__subitem {
@@ -25,8 +26,11 @@
   &__img {
     img {
       border-radius: 2rem;
-      max-width: 40vw;
+      max-width: 100%;
       opacity: 0.5;
+      @media screen and (min-width: 768px) {
+        max-width: 40vw;
+      }
     }
   }
 
