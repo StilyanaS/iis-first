@@ -11,6 +11,7 @@ export class ConnectFirebase {
   postsDb = collection(this.firestore, 'posts');
   usersDb = collection(this.firestore, 'users');
   contactsDb = collection(this.firestore, 'contacts');
+  serviceDetailsDb = collection(this.firestore, 'services-description');
 
   getServices(): Observable<any> {
     return collectionData(this.servicesDb, {
@@ -73,6 +74,17 @@ export class ConnectFirebase {
       tap((docRef) => console.log('Contact with ID:', docRef.id)),
       catchError((err) => {
         console.error('Contact is not created:', err);
+        throw err;
+      })
+    );
+  }
+
+  getServiceDetails() {
+    return collectionData(this.serviceDetailsDb, {
+      idField: 'id',
+    }).pipe(
+      catchError((err) => {
+        console.error('Error fetching service details:', err);
         throw err;
       })
     );

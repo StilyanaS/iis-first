@@ -9,12 +9,13 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { ErrorComponent } from './views/error/error.component';
 import { AuthGuard } from './guards/user.guard';
+import { ServicesComponent } from './views/services/services.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '', component: HomeComponent  },
-  { path: 'services', component: HomeComponent },
+  { path: 'services', component: ServicesComponent },
   { path: 'createPost', component: createPostComponent },
   { path: 'authentication', component: UserAuthComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },

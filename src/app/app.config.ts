@@ -6,12 +6,13 @@ import { routes } from './app.routes';
 import { environment } from './../environments/environment';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { appInterceptor } from './interceptors/app.interceptor';
-
+import { getStorage, provideStorage } from '@angular/fire/storage';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([appInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withViewTransitions()),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
   ]
 };

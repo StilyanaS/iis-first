@@ -1,4 +1,4 @@
-.service-section{
+.services-details {
   &__container {
     display: flex;
     flex-direction: column;
@@ -31,6 +31,8 @@
       border-radius: 2rem;
       max-width: 100%;
       opacity: 0.5;
+      object-fit: cover;
+      aspect-ratio: 4/3;
       @media screen and (min-width: 768px) {
         max-width: 40vw;
       }

@@ -1,0 +1,17 @@
+<div class="services-details__container container">
+  @for (imgUrl of imageUrls(); track $index){
+  <div class="services-details__item">
+    <div class="services-details__img">
+      <img src="{{ imgUrl }}" alt="" />
+    </div>
+    <div class="services-details__info">
+      <h2>{{ serviceDetails()[$index].title }}</h2>
+      <div class="services-details__subitem">
+        <div class="services-details__text">
+          {{ serviceDetails()[$index].short_desc }}
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
