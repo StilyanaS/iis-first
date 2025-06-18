@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { ImageService } from '../../services/image.service';
 @Component({
   selector: 'app-header',
@@ -7,15 +7,17 @@ import { ImageService } from '../../services/image.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   menuOpen = false;
-  imageUrl: WritableSignal<string> = signal('');
+  imageUrl: WritableSignal<string | unknown> = signal('');
   loading: WritableSignal<boolean> = signal(true);
   error: WritableSignal<any> = signal(null);
   constructor(private imageService: ImageService) {}
+  ngOnInit(): void {
+    this.getImgUrl();
+  }
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
-    this.getImgUrl();
   }
   getImgUrl() {
     this.loading.set(true);
@@ -23,7 +25,7 @@ export class HeaderComponent {
       next: (imageUrl: unknown) => {
         console.log('imageUrl', imageUrl);
 
-        //this.imageUrl.set(imageUrl);
+        this.imageUrl.set(imageUrl);
       },
       error: (err) => {
         this.error.set(err);

@@ -19,12 +19,13 @@
           placeholder="john.doe@gmail.com"
           ngModel
           required
+          [email]="true"
           #email="ngModel"
         />
       </div>
       @if (email?.touched){ @if (email?.errors?.['required']){
       <p class="error">Email is required!</p>
-      } @if (email?.errors?.['emailValidator']){
+      } @if (email?.errors?.['email']){
       <p class="error">Email is not valid!</p>
       } }
       <div class="login--field field-icon">

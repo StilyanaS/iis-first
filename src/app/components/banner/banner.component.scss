@@ -59,6 +59,7 @@
     border-left: 0;
     border-radius: 0 5px 5px 0;
     padding: 0 1rem;
+    cursor: pointer;
   }
   &__placeholder {
     width: 32vw;
@@ -83,5 +84,11 @@
       max-width: 100%;
     }
   }
+
+}
+.error {
+  color: red;
+  font-size: 1.2rem;
+  margin-top: 1rem;
 }
 

@@ -12,19 +12,37 @@
       it has to be completely personalized and based on bussiness needs.
     </div>
     <div class="banner__subscription-form">
-      <form action="" class="banner__subscription-form-container">
-        <input
-          type="email"
-          placeholder="Type your email adress"
-          class="banner__subscription-input"
-        />
-        <button
-          type="button"
-          class="banner__subscription-button"
-          (click)="saveContact()"
-        >
-          Let's talk
-        </button>
+      <form
+        action=""
+        class=""
+        #form="ngForm"
+        (ngSubmit)="saveContact(email.value)"
+      >
+        <div class="banner__subscription-form-container">
+          <input
+            type="email"
+            placeholder="Type your email adress"
+            class="banner__subscription-input"
+            required
+            name="email"
+            id="email"
+            ngModel
+            realisticEmail
+            #email="ngModel"
+          />
+          <button
+            type="submit"
+            class="banner__subscription-button"
+            [disabled]="form.invalid"
+          >
+            Let's talk
+          </button>
+        </div>
+        @if (email?.touched){ @if (email?.errors?.['required']){
+        <p class="error">Email is required!</p>
+        } @if (email?.errors?.['realisticEmail']){
+        <p class="error">Email is not valid!</p>
+        } }
       </form>
     </div>
   </div>
