@@ -4,7 +4,13 @@
       src="https://iis-bg.netlify.app/static/media/logo.22788ac2318342b9c5a5b45279c8e7c8.svg"
     />
   </div>
-  <button class="hamburger" (click)="menuOpen = !menuOpen" aria-label="Toggle menu">
+  <button
+    class="hamburger"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen"
+    [attr.aria-controls]="'nav-links'"
+    aria-label="Toggle menu"
+  >
     &#9776;
   </button>
   <div class="nav-links" [class.open]="menuOpen">

@@ -1,7 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { ConnectFirebase } from '../../services/firebaseConnection.service';
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root',
 })

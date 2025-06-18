@@ -1,12 +1,36 @@
-import { Component } from '@angular/core';
-
+import { Component, signal, WritableSignal } from '@angular/core';
+import { ImageService } from '../../services/image.service';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   menuOpen = false;
+  imageUrl: WritableSignal<string> = signal('');
+  loading: WritableSignal<boolean> = signal(true);
+  error: WritableSignal<any> = signal(null);
+  constructor(private imageService: ImageService) {}
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+    this.getImgUrl();
+  }
+  getImgUrl() {
+    this.loading.set(true);
+    this.imageService.getImageUrl('IIS-logo-black.svg').subscribe({
+      next: (imageUrl: unknown) => {
+        console.log('imageUrl', imageUrl);
+
+        //this.imageUrl.set(imageUrl);
+      },
+      error: (err) => {
+        this.error.set(err);
+      },
+      complete: () => {
+        this.loading.set(false);
+      },
+    });
+  }
 }
