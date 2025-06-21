@@ -1,0 +1,21 @@
+<div class="calendar-container">
+  <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events()"
+    (dayClicked)="handleDayClick($event.day.date)"
+  >
+  </mwl-calendar-month-view>
+
+  @if (selectedDate()) {
+  <div class="slot-panel">
+    <h3>Horas disponibles para {{ selectedDate() | date : "fullDate" }}</h3>
+    <ul>
+      @for (hour of availableHours(); track hour) {
+      <li>
+        <button (click)="reserveSlot(hour)">Reservar a las {{ hour }}</button>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>

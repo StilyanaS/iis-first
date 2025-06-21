@@ -2,7 +2,11 @@
   @for (imgUrl of imageUrls(); track $index){
   <div class="services-details__item">
     <div class="services-details__img">
+      @if (loading()) {
+      <div class="services-details__placeholder"></div>
+      } @else {
       <img src="{{ imgUrl }}" alt="" />
+      }
     </div>
     <div class="services-details__info">
       <h2>{{ serviceDetails()[$index].title }}</h2>
