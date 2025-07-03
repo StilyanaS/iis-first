@@ -1,6 +1,13 @@
 <nav class="nav-container">
   <div class="nav-logo">
-    <img src="{{ imageUrl() }}" />
+    @if (imageService.loading()) {
+    <p>Loading logo...</p>
+    } @else if (imageService.error()) {
+    <p>Error loading logo</p>
+    } @else if (imageService.singleImageUrl()) {
+    <img [src]="imageService.singleImageUrl()!" alt="IIS Logo" />
+    }
+
   </div>
   <button
     class="hamburger"
@@ -13,11 +20,11 @@
   </button>
   <div class="nav-links" [class.open]="menuOpen">
     <ul class="nav-links__container">
-      <li><a href="/">Home</a></li>
-      <li><a href="/services">Services</a></li>
-      <li>Contact</li>
-      <li><a href="/posts">Posts</a></li>
-      <li class="primary-button">Call us</li>
+      <li><a href="/">{{ 'header.home' | translate }}</a></li>
+      <li><a href="/services">{{ 'header.services' | translate }}</a></li>
+      <li>{{ 'header.contact' | translate }}</li>
+      <li><a href="/posts">{{ 'header.posts' | translate }}</a></li>
+      <li class="primary-button">{{ 'header.call_us' | translate }}</li>
     </ul>
   </div>
 </nav>

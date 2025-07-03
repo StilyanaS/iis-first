@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { from, forkJoin, of, Observable } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, finalize } from 'rxjs/operators';
 import { Storage, ref, getDownloadURL, listAll } from '@angular/fire/storage';
 
 @Injectable({ providedIn: 'root' })
 export class ImageService {
+  private _singleImageUrl: WritableSignal<string | undefined> = signal(undefined);
+  readonly singleImageUrl = this._singleImageUrl.asReadonly();
+  loading: WritableSignal<boolean> = signal(false);
+  error: WritableSignal<any> = signal(null);
   constructor(private storage: Storage) {}
 
   getFolderImages(folderPath: string) {
@@ -32,5 +36,18 @@ export class ImageService {
         return from([undefined]); // Emit undefined on error
       })
     );
+  }
+
+  loadImageUrl(imagePath: string): void {
+    this.loading.set(true);
+    this.error.set(null);
+    this.getImageUrl(imagePath).pipe(
+      finalize(() => this.loading.set(false))
+    ).subscribe({
+      next: (url) => this._singleImageUrl.set(url),
+      error: (err) => {
+        this.error.set(err);
+      }
+    });
   }
 }

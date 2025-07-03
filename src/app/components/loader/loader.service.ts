@@ -1,20 +1,17 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal, WritableSignal, Signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoaderService {
-  private loading = new BehaviorSubject<boolean>(false);
-  isLoading$ = this.loading.asObservable();
+  private _isLoading: WritableSignal<boolean> = signal(false);
+  isLoading: Signal<boolean> = this._isLoading.asReadonly();
 
   show() {
-    this.loading.next(true);
+    this._isLoading.set(true);
   }
 
   hide() {
-      this.loading.next(false);
+      this._isLoading.set(false);
   }
 }
-// This service manages the loading state of the application.
-// It uses a BehaviorSubject to track whether the application is currently loading.
