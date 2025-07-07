@@ -12,6 +12,7 @@
       it has to be completely personalized and based on bussiness needs.
     </div>
     <div class="banner__subscription-form">
+      @if(!dataSent){
       <form
         action=""
         class=""
@@ -44,6 +45,12 @@
         <p class="error">Email is not valid!</p>
         } }
       </form>
+      } @else {
+      <p class="banner__confirm-message">
+        ✅​ We've got your e-mail and will contact you in the next 24 hours.
+        Thank you!
+      </p>
+      }
     </div>
   </div>
   <div class="banner__img-container">

@@ -1,21 +1,36 @@
-<div class="calendar-container">
-  <mwl-calendar-month-view
-    [viewDate]="viewDate"
-    [events]="events()"
-    (dayClicked)="handleDayClick($event.day.date)"
-  >
-  </mwl-calendar-month-view>
-
+<div class="calendar__container">
+  <mat-form-field class="example-full-width">
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      (dateInput)="handleDate($event)"
+      [min]="mindate"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
   @if (selectedDate()) {
   <div class="slot-panel">
-    <h3>Horas disponibles para {{ selectedDate() | date : "fullDate" }}</h3>
-    <ul>
+    <h3>Availability {{ selectedDate() | date : "fullDate" }}</h3>
+    <ul class="slot-list">
       @for (hour of availableHours(); track hour) {
       <li>
-        <button (click)="reserveSlot(hour)">Reservar a las {{ hour }}</button>
+        <button (click)="reserveSlot(hour)" class="slot-button">
+          Reserve slot at {{ hour }}
+        </button>
       </li>
       }
     </ul>
   </div>
+  <app-dialog
+    Date="{{ formattedDate }}"
+    Hour="{{ selectedHour() }}"
+    (confirmedReservation)="requestSlot($event)"
+    [slotCreated]="slotCreated()"
+  ></app-dialog>
   }
 </div>

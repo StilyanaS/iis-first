@@ -69,6 +69,11 @@
     border-radius: 5px;
   }
 
+  &__confirm-message {
+    color: #eee;
+    font-size: 1.2rem;
+  }
+
   .img-banner {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -86,9 +91,5 @@
   }
 
 }
-.error {
-  color: red;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-}
+
 

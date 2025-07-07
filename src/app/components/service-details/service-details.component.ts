@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { catchError, finalize, forkJoin, from, of, switchMap } from 'rxjs';
+import { finalize } from 'rxjs';
 import { ImageService } from '../../services/image.service';
 import { ServiceDetailsService } from './service-details.service';
 import { ServiceDetails } from './service-details.interface';

@@ -1,76 +1,154 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  CalendarEvent,
-  CalendarModule,
-  CalendarView,
-  CalendarMonthViewComponent,
-} from 'angular-calendar';
-import { startOfDay } from 'date-fns';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { GoogleCalendarService } from './google-calendar.service';
+import { CalendarSlots } from './calendar.interface';
+import { effect } from '@angular/core';
+import { LoaderService } from '../loader/loader.service';
+import { DialogComponent } from '../dialog/dialog.component';
+import { Form } from '../form/form.interface';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, CalendarModule],
+  imports: [
+    CommonModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatIconModule,
+    DialogComponent
+  ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
+  providers: [GoogleCalendarService, LoaderService],
+  encapsulation: ViewEncapsulation.None,
 })
-export class CalendarComponent {
-  view = CalendarView.Month;
-  CalendarView = CalendarView;
-  viewDate = new Date();
-
-  // ✅ Signal reactivo para la fecha seleccionada
+export class CalendarComponent implements OnInit {
+  @ViewChild(DialogComponent) slotsDialog!: DialogComponent;
   selectedDate = signal<Date | null>(null);
+  formattedDate = '';
+  events = signal<[{}]>([{}]);
+  mindate = new Date();
+  slotsData = signal<CalendarSlots>({ busy: [] });
+  busyHours = signal<string[]>([]);
+  slotsLoaded = signal<boolean>(false);
+  loaderService = inject(LoaderService);
+  selectedHour = signal('');
+  slotCreated = signal<boolean>(false);
+  constructor(
+    private calendarService: GoogleCalendarService
+  ) {
+    effect(() => {
+      const date = this.selectedDate();
+      if (date) {
+        this.formattedDate = this.formatDateLocal(date);
+        this.getSlots();
+      }
+    });
+  }
+  ngOnInit(): void {}
 
-  // ✅ Signal con los eventos (ej: reservas ya hechas)
-  events = signal<CalendarEvent[]>([
-    {
-      start: startOfDay(new Date(2025, 5, 20)),
-      title: 'Slot reservado',
-      color: { primary: '#ad2121', secondary: '#FAE3E3' },
-    },
-  ]);
+  handleDate(event: any) {
+    this.selectedDate.set(event.value);
+  }
 
-  // ✅ Computed signal para las horas disponibles (reactivo)
   availableHours = computed(() => {
     const date = this.selectedDate();
     if (!date) return [];
+    console.log(this.busyHours);
+
     const hours: string[] = [];
-    for (let h = 9; h <= 17; h++) {
-      hours.push(`${h}:00`);
+    for (let h = 9; h < 17; h++) {
+      hours.push(`${h.toString().padStart(2, '0')}:00`);
+      hours.push(`${h.toString().padStart(2, '0')}:30`);
     }
-    return hours;
+
+    const busy = this.busyHours();
+
+    return hours.filter((h) => !busy.includes(h));
   });
 
-  // ✅ Al hacer clic en un día del calendario
-  handleDayClick(date: Date): void {
-    this.selectedDate.set(date);
-  }
-
-  // ✅ Simulación de reserva (se podría extender a un backend)
   reserveSlot(hour: string): void {
     const date = this.selectedDate();
     if (!date) return;
+    this.selectedHour.set(hour);
+    this.slotsDialog.openDialog();
+    //this.getSlots();
+  }
 
-    const title = `Reservado a las ${hour}`;
-    const [h, min] = hour.split(':').map(Number);
+  requestSlot(data: Form) {
+    this.loaderService.show();
+    if (!data) {
+      console.error('Form data is undefined');
+      return;
+    }
+    console.log('Requesting slot with data:', data);
 
-    this.events.update((current) => [
-      ...current,
-      {
-        start: new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate(),
-          h,
-          min
-        ),
-        title,
-        color: { primary: '#1e90ff', secondary: '#D1E8FF' },
+    this.calendarService
+      .reserveSlot({
+        name: data.name ?? '',
+        email: data.email ?? '',
+        dateStart: this.formattedDate,
+        hour: this.selectedHour(),
+      })
+      .subscribe({
+        next: (res) => {
+          console.log('Slot reserved successfully:', res);
+          this.slotCreated.set(true);
+          this.getSlots(); // Refresh the slots after reservation
+        },
+        error: (err) => console.error('Error reserving the slot', err),
+        complete: () => {
+          //this.loaderService.hide();
+        },
+      });
+  }
+
+  getSlots() {
+    this.loaderService.show();
+    console.log('formatted date', this.formattedDate);
+
+    if(this.formattedDate)
+    this.calendarService.getAvailableSlots(this.formattedDate).subscribe({
+      next: (data) => {
+        this.slotsData.set(data);
+        this.formatHours();
       },
-    ]);
+      error: (err) => {
+        console.error('Error getting calendar slots:', err);
+      },
+      complete: () => {
+        this.loaderService.hide();
 
-    alert(`Slot reservado: ${date.toDateString()} a las ${hour}`);
+      }
+    });
+  }
+
+  formatHours() {
+    const busySlots = this.slotsData()?.busy || [];
+    const formatted = busySlots.map((slot: any) => {
+      const start = new Date(slot.start);
+      return start.toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'Europe/Madrid',
+      });
+    });
+    this.busyHours.set(formatted);
+    console.log('busy hours',this.busyHours());
+
+  }
+
+  formatDateLocal(date: Date) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // meses 0-11
+    const day = date.getDate().toString().padStart(2, '0');
+     return `${year}-${month}-${day}`;
   }
 }

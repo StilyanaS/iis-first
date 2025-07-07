@@ -1,0 +1,22 @@
+<dialog #slotsDialog class="dialog">
+  <div class="dialog__header">
+    @if(!slotCreated){
+    <h3>Reserve Slot on {{ Date }} at {{ Hour }}</h3>
+    <p>Are you sure you want to reserve this slot?</p>
+    } @else {
+    <h3>Slot {{ Date }} at {{ Hour }} Reserved</h3>
+    <p>Your slot has been successfully reserved!</p>
+    }
+  </div>
+  @if (!slotCreated){
+  <app-form
+    [buttonText]="'Reserve slot'"
+    (registerClick)="confirmReservation($event)"
+  ></app-form>
+  }
+  <div class="dialog__content">
+    <button (click)="closeDialog()" class="cancel-button">
+      @if (!slotCreated){ Cancel } @else { Close }
+    </button>
+  </div>
+</dialog>

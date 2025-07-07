@@ -1,1 +1,47 @@
+@use '@angular/material' as mat;
+.calendar {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+  }
+}
+
+.slot-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+.slot-button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #18C5CCEE;
+  border-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+}
+:host .mat-datepicker-content {
+  background: #0a223a;
+  color: #18C5CCEE;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  //background-color: transparent !important;
+  color: #18C5CCEE;
+  border: 1px solid #18C5CCEE;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 100%;
+}
 
