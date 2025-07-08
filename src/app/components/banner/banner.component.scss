@@ -13,7 +13,7 @@
     justify-content: center;
     color: #eee;
     gap: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0 0 1rem;
 
     @media screen and (min-width: 960px) {
       gap: 0;
@@ -77,6 +77,11 @@
   .img-banner {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    max-width: 60%;
+    @media screen and (min-width: 960px) {
+      max-width: 100%;
+
+    }
   }
   .loaded {
     opacity: 1;
@@ -88,6 +93,10 @@
     img {
       max-width: 100%;
     }
+  }
+
+  &__accept-privacy {
+    margin-top: .5rem;
   }
 
 }

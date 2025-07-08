@@ -1,10 +1,11 @@
-@use "@angular/material" as mat;
-@include mat.core();
-//@import '@angular/material/prebuilt-themes/indigo-pink.css';
+//@use "@angular/material" as mat;
+//@include mat.core();
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 html, body {
   height: 100%;
   min-height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 body {
   margin: 0;
@@ -18,12 +19,6 @@ body {
     "YTLC" 500;
   color: #eee;
   }
-$theme: mat.define-theme((
-  color: (
-    theme-type: "dark",
-    primary: mat.define-palette(mat.$blue-palette, 500, 300)
-  )
-));
 ::ng-deep * {
   margin: 0;
   padding: 0;
@@ -39,9 +34,9 @@ $theme: mat.define-theme((
 }
 .main-content {
   background: radial-gradient(circle at 3% 25%,#002853 0,#040c18 25%);
-  padding: 1rem;
+
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 .footer-content {
   display: flex;
@@ -95,7 +90,7 @@ a {
     height: 50px;
     padding: .2rem;
     font-size: 1rem;
-    margin: 1rem auto
+    margin: 1rem auto 0;
 }
 
 .vertical-flex {
@@ -113,6 +108,36 @@ a {
   color: red;
   font-size: 1rem;
   margin: .5rem 0 0.2rem;
+}
+.mv-1 {
+  margin: 1rem 0;
+}
+
+.mh-1 {
+  margin: 0 1rem;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+
+
+.flex-wrap {
+  flex-wrap: wrap;
+  @media only screen and (min-width: 960px) {
+    flex-wrap: nowrap;
+  }
+}
+
+
+.footer-content {
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
 }
 
 
@@ -135,21 +160,4 @@ a {
     opacity: 0;
     filter: blur(10px);
   }
-}
-
-
-.flex-wrap {
-  flex-wrap: wrap;
-  @media only screen and (min-width: 960px) {
-    flex-wrap: nowrap;
-  }
-}
-
-
-.footer-content {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
 }

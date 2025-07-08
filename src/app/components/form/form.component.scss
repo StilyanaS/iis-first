@@ -16,15 +16,26 @@
 
   &--input {
     width: 80%;
-    padding: .5rem;
+    padding: 1rem;
     background-color: transparent;
     border:none;
     color: #eee;
+    font-size: 1rem;
     &:focus {
       border: none;
       -webkit-transition: 0.5s;
       transition: 0.5s;
     }
+    &:focus-visible {
+      outline: none;
+      border: 1px solid #18C5CCEE;
+      border-radius: 4px;
+    }
+  }
+
+  &__accept-privacy {
+    color: #eee;
+    margin: 0;
   }
 }
   .text-center {

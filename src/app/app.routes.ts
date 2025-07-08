@@ -10,7 +10,7 @@ import { UsersListComponent } from './components/users-list/users-list.component
 import { ErrorComponent } from './views/error/error.component';
 import { AuthGuard } from './guards/user.guard';
 import { ServicesComponent } from './views/services/services.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import { ContactComponent } from './views/contact/contact.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +31,6 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'calendar', component: CalendarComponent },
+  { path: 'calendar', component: ContactComponent },
   { path: '**', component: ErrorComponent },
 ];

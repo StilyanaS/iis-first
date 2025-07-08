@@ -1,5 +1,5 @@
 @if(imgUrl){
-<div class="banner-container container">
+<div class="banner-container container mh-1">
   <div class="banner__subscription-container">
     <div class="banner__subscription-title">
       <h1 class="gradient-text">
@@ -39,6 +39,10 @@
             Let's talk
           </button>
         </div>
+        <p class="banner__accept-privacy">
+          By clicking the button, you agree to our Terms of Service and Privacy
+          Policy.
+        </p>
         @if (email?.touched){ @if (email?.errors?.['required']){
         <p class="error">Email is required!</p>
         } @if (email?.errors?.['realisticEmail']){

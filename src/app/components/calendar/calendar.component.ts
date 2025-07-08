@@ -11,6 +11,7 @@ import { effect } from '@angular/core';
 import { LoaderService } from '../loader/loader.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Form } from '../form/form.interface';
+import { SlotPanelComponent } from '../slot-panel/slot-panel.component';
 @Component({
   selector: 'app-calendar',
   standalone: true,
@@ -21,11 +22,12 @@ import { Form } from '../form/form.interface';
     MatInputModule,
     MatDatepickerModule,
     MatIconModule,
-    DialogComponent
+    DialogComponent,
+    SlotPanelComponent,
   ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  providers: [GoogleCalendarService, LoaderService],
+  providers: [GoogleCalendarService, LoaderService, SlotPanelComponent],
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent implements OnInit {
@@ -40,9 +42,7 @@ export class CalendarComponent implements OnInit {
   loaderService = inject(LoaderService);
   selectedHour = signal('');
   slotCreated = signal<boolean>(false);
-  constructor(
-    private calendarService: GoogleCalendarService
-  ) {
+  constructor(private calendarService: GoogleCalendarService) {
     effect(() => {
       const date = this.selectedDate();
       if (date) {
@@ -113,20 +113,19 @@ export class CalendarComponent implements OnInit {
     this.loaderService.show();
     console.log('formatted date', this.formattedDate);
 
-    if(this.formattedDate)
-    this.calendarService.getAvailableSlots(this.formattedDate).subscribe({
-      next: (data) => {
-        this.slotsData.set(data);
-        this.formatHours();
-      },
-      error: (err) => {
-        console.error('Error getting calendar slots:', err);
-      },
-      complete: () => {
-        this.loaderService.hide();
-
-      }
-    });
+    if (this.formattedDate)
+      this.calendarService.getAvailableSlots(this.formattedDate).subscribe({
+        next: (data) => {
+          this.slotsData.set(data);
+          this.formatHours();
+        },
+        error: (err) => {
+          console.error('Error getting calendar slots:', err);
+        },
+        complete: () => {
+          this.loaderService.hide();
+        },
+      });
   }
 
   formatHours() {
@@ -141,14 +140,13 @@ export class CalendarComponent implements OnInit {
       });
     });
     this.busyHours.set(formatted);
-    console.log('busy hours',this.busyHours());
-
+    console.log('busy hours', this.busyHours());
   }
 
   formatDateLocal(date: Date) {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // meses 0-11
     const day = date.getDate().toString().padStart(2, '0');
-     return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day}`;
   }
 }
