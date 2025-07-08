@@ -20,12 +20,12 @@ export class SinglePostComponent implements OnInit {
   private sanitizer = inject(DomSanitizer);
   constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
-    this.gePostId();
+    this.getPostId();
     this.getPost(this.id);
     this.sanitizeContent();
   }
 
-  gePostId() {
+  getPostId() {
     this.id = this.route.snapshot.params['themeId'];
     this.getPostsService.getPosts().subscribe((posts) => {
       this.posts = posts;
@@ -34,12 +34,17 @@ export class SinglePostComponent implements OnInit {
   }
 
   getPost(id: string) {
+    if (!this.posts || !Array.isArray(this.posts)) {
+      console.log('Posts not loaded yet or not an array');
+      return;
+    }
     for (const singlePost of this.posts) {
       singlePost.id == id && (this.post = singlePost);
     }
   }
 
   sanitizeContent() {
+    if (!this.post) return;
     return this.sanitizer.bypassSecurityTrustHtml(this.post.content);
   }
 }

@@ -3,7 +3,7 @@ import { Firestore, collectionData, addDoc, collection } from "@angular/fire/fir
 import { catchError, from, Observable, tap } from "rxjs";
 import { PostsService } from "../components/posts-section/posts-section.interface";
 import { UserData } from "../components/register/user-register.interface";
-import { CollectionReference, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { CollectionReference, deleteDoc, doc, DocumentData, updateDoc } from "firebase/firestore";
 import { ServiceDetails } from "../components/service-details/service-details.interface";
 import { SectionService } from "../components/service-section/section-service.interface";
 import { PostService } from "../components/single-post/single-post.interface";
@@ -18,8 +18,14 @@ export class ConnectFirebase {
     this.firestore,
     'posts'
   ) as CollectionReference<PostService>;
-  usersDb = collection(this.firestore, 'users') as CollectionReference<UserData>;
-  contactsDb = collection(this.firestore, 'contacts') as CollectionReference<string>;
+  usersDb = collection(this.firestore, 'users') as CollectionReference<
+    UserData,
+    DocumentData
+  >;
+  contactsDb = collection(
+    this.firestore,
+    'contacts'
+  ) as CollectionReference<{email: string}>;
   serviceDetailsDb = collection(
     this.firestore,
     'services-description'
@@ -74,7 +80,7 @@ export class ConnectFirebase {
   updateUser(data: UserData) {
     // Remove id from the update payload
     const { id, ...userData } = data;
-    
+
     let user = doc(this.usersDb, id);
     return from(updateDoc(user, userData)).pipe(
       tap((docRef) => console.log('User updated:', docRef)),
@@ -85,8 +91,13 @@ export class ConnectFirebase {
     );
   }
 
-  setContact(data: string) {
-    return from(addDoc(this.contactsDb, data)).pipe(
+  setContact(data: { email: string }) {
+    const contactData = {
+      email: data.email,
+      createdAt: new Date(),
+      // Add other fields as needed
+    };
+    return from(addDoc(this.contactsDb, contactData)).pipe(
       tap((docRef) => console.log('Contact with ID:', docRef.id)),
       catchError((err) => {
         console.error('Contact is not created:', err);

@@ -10,6 +10,6 @@ export class BannerService {
   constructor() {}
 
   saveContant(email: string): Observable<[]> {
-    return this._initService.setContact( email ).pipe(tap(console.log));
+    return this._initService.setContact( {email} ).pipe(tap(console.log));
   }
 }
