@@ -1,6 +1,7 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { ImageService } from '../../services/image.service';
 import { RouterModule } from '@angular/router';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   menuOpen = false;
   imageUrl: WritableSignal<string | unknown> = signal('');
   loading: WritableSignal<boolean> = signal(true);
-  error: WritableSignal<any> = signal(null);
+  error: WritableSignal<HttpErrorResponse | null> = signal(null);
   constructor(private imageService: ImageService) {}
   ngOnInit(): void {
     this.getImgUrl();

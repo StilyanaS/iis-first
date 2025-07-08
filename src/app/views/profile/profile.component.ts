@@ -5,11 +5,12 @@ import { ProfileDataComponent } from '../../components/profile-data/profile-data
 import { UsersListComponent } from '../../components/users-list/users-list.component';
 import { BehaviorSubject } from 'rxjs';
 import { UserLogin } from '../../components/login/login-user.interface';
+import { UserData } from '../../components/register/user-register.interface';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ProfileActionsComponent, ProfileDataComponent, UsersListComponent],
+  imports: [ProfileActionsComponent, ProfileDataComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit{
   private readonly localStorageService = inject(LocalStorageService);
   private profile$$ = new BehaviorSubject<UserLogin | null>(null);
   private profile$ = this.profile$$.asObservable();
-  profileData?: any;
+  profileData!: UserData ;
   userName: string = '';
   accountType?: string = '';
   isAdmin: boolean = false;
@@ -27,8 +28,8 @@ export class ProfileComponent implements OnInit{
     this.setDataInfo();
   }
   getProfile() {
-    this.profileData = this.localStorageService.getItem('profile');
-    this.profileData = JSON.parse(this.profileData);
+    const profile = this.localStorageService.getItem('profile');
+    profile && (this.profileData = JSON.parse(profile));
 
   }
 

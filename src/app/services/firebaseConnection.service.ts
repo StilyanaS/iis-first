@@ -3,23 +3,35 @@ import { Firestore, collectionData, addDoc, collection } from "@angular/fire/fir
 import { catchError, from, Observable, tap } from "rxjs";
 import { PostsService } from "../components/posts-section/posts-section.interface";
 import { UserData } from "../components/register/user-register.interface";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { CollectionReference, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { ServiceDetails } from "../components/service-details/service-details.interface";
+import { SectionService } from "../components/service-section/section-service.interface";
+import { PostService } from "../components/single-post/single-post.interface";
 @Injectable({ providedIn: 'root' })
 export class ConnectFirebase {
   firestore = inject(Firestore);
-  servicesDb = collection(this.firestore, 'services');
-  postsDb = collection(this.firestore, 'posts');
-  usersDb = collection(this.firestore, 'users');
-  contactsDb = collection(this.firestore, 'contacts');
-  serviceDetailsDb = collection(this.firestore, 'services-description');
+  servicesDb = collection(
+    this.firestore,
+    'services'
+  ) as CollectionReference<ServiceDetails>;
+  postsDb = collection(
+    this.firestore,
+    'posts'
+  ) as CollectionReference<PostService>;
+  usersDb = collection(this.firestore, 'users') as CollectionReference<UserData>;
+  contactsDb = collection(this.firestore, 'contacts') as CollectionReference<string>;
+  serviceDetailsDb = collection(
+    this.firestore,
+    'services-description'
+  ) as CollectionReference<ServiceDetails>;
   calendarRequestsDb = collection(this.firestore, 'valendar-requests');
 
-  getServices(): Observable<any> {
+  getServices(): Observable<SectionService[]> {
     return collectionData(this.servicesDb, {
       idField: 'id',
     });
   }
-  getPosts(): Observable<any> {
+  getPosts(): Observable<PostService[]> {
     return collectionData(this.postsDb, {
       idField: 'id',
     });
@@ -34,7 +46,7 @@ export class ConnectFirebase {
     );
   }
 
-  getUsers(): Observable<any> {
+  getUsers(): Observable<UserData[]> {
     return collectionData(this.usersDb, {
       idField: 'id',
     });
@@ -59,9 +71,12 @@ export class ConnectFirebase {
       })
     );
   }
-  updateUser(data: any) {
-    let user = doc(this.usersDb, data.id);
-    return from(updateDoc(user, data)).pipe(
+  updateUser(data: UserData) {
+    // Remove id from the update payload
+    const { id, ...userData } = data;
+    
+    let user = doc(this.usersDb, id);
+    return from(updateDoc(user, userData)).pipe(
       tap((docRef) => console.log('User updated:', docRef)),
       catchError((err) => {
         console.error('User is not updated:', err);
@@ -70,7 +85,7 @@ export class ConnectFirebase {
     );
   }
 
-  setContact(data: any) {
+  setContact(data: string) {
     return from(addDoc(this.contactsDb, data)).pipe(
       tap((docRef) => console.log('Contact with ID:', docRef.id)),
       catchError((err) => {
@@ -91,7 +106,12 @@ export class ConnectFirebase {
     );
   }
 
-  reserveSlot(data: {name: string, email: string, dateStart: string, hour: string}) {
+  reserveSlot(data: {
+    name: string;
+    email: string;
+    dateStart: string;
+    hour: string;
+  }) {
     return from(addDoc(this.calendarRequestsDb, data)).pipe(
       tap((docRef) => console.log('Request created', docRef.id)),
       catchError((err) => {

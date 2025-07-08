@@ -4,7 +4,7 @@ import { UserData } from "../components/register/user-register.interface";
 @Injectable({ providedIn: 'root' })
 export class AuthCheck {
   _localStService = inject(LocalStorageService);
-  localStorageAcc!: any;
+  localStorageAcc!: string | null;
   account!: UserData;
   isLogged(): boolean{
     this.localStorageAcc = this._localStService.getItem('profile');

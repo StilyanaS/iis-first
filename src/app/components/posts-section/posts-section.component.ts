@@ -25,8 +25,4 @@ export class PostsSectionComponent implements OnInit {
       }
     });
   }
-
-  postClick(index: any) {
-
-  }
 }
