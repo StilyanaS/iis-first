@@ -2,11 +2,10 @@ import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ConnectFirebase } from '../../services/firebaseConnection.service';
 import { UserData } from './user-register.interface';
-import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
