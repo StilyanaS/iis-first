@@ -14,6 +14,7 @@ export class DialogComponent {
   @Input() Date: string = '';
   @Input() Hour: string = '';
   @Input() slotCreated: boolean = false;
+  @Input() loading: boolean = false;
   @Output() confirmedReservation = new EventEmitter<Form>();
   data: Form = { email: '', name: '' };
   ngAfterViewInit() {

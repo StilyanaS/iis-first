@@ -42,6 +42,7 @@ export class CalendarComponent implements OnInit {
   loaderService = inject(LoaderService);
   selectedHour = signal('');
   slotCreated = signal<boolean>(false);
+  isLoading: boolean = false;
   constructor(private calendarService: GoogleCalendarService) {
     effect(() => {
       const date = this.selectedDate();
@@ -82,7 +83,7 @@ export class CalendarComponent implements OnInit {
   }
 
   requestSlot(data: Form) {
-    this.loaderService.show();
+    this.isLoading = true;
     if (!data) {
       console.error('Form data is undefined');
       return;
@@ -104,7 +105,7 @@ export class CalendarComponent implements OnInit {
         },
         error: (err) => console.error('Error reserving the slot', err),
         complete: () => {
-          //this.loaderService.hide();
+          this.isLoading = false;
         },
       });
   }

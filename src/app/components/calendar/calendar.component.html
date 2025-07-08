@@ -24,6 +24,7 @@
     Hour="{{ selectedHour() }}"
     (confirmedReservation)="requestSlot($event)"
     [slotCreated]="slotCreated()"
+    [loading]="isLoading"
   ></app-dialog>
   }
 </div>

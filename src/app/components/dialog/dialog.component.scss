@@ -12,9 +12,14 @@
   }
 
   &__content {
+    color: #eee;
     display: flex;
     gap: 1rem;
     justify-content: space-around;
+  }
+
+  p {
+    color: #eee;
   }
 
   .confirm-button {
