@@ -12,8 +12,8 @@ import { ConnectFirebase } from '../../services/firebaseConnection.service';
 export class createPostComponent {
   private readonly _initService = inject(ConnectFirebase);
 
-  addPost(title: string, content: string) {
-    this._initService.setPost({title, content})
+  addPost(title: string, content: string, img: string) {
+    this._initService.setPost({title, content, img})
   }
 
   updatePost(id: string, content: string) {
