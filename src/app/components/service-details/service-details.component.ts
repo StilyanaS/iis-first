@@ -5,6 +5,7 @@ import { ImageService } from '../../services/image.service';
 import { ServiceDetailsService } from './service-details.service';
 import { ServiceDetails } from './service-details.interface';
 import { LoaderService } from '../loader/loader.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-services-details',
@@ -20,7 +21,7 @@ export class ServiceDetailsComponent implements OnInit {
   imageUrls: WritableSignal<string[]> = signal([]);
   serviceDetails: WritableSignal<ServiceDetails[]> = signal([]);
   loading: WritableSignal<boolean> = signal(true);
-  error: WritableSignal<any> = signal(null);
+  error: WritableSignal<HttpErrorResponse | null> = signal(null);
   loaderService = inject(LoaderService);
 
   constructor(
@@ -60,11 +61,10 @@ export class ServiceDetailsComponent implements OnInit {
         this.serviceDetails.set(description);
         console.log('short desc', this.serviceDetails()[0].short_desc);
       },
-      error: (err: Error) => {
+      error: (err: HttpErrorResponse) => {
         console.error('Error fetching service description:', err);
         this.error.set(err);
       },
     });
   }
-
 }

@@ -1,6 +1,6 @@
 <div class="posts-section__container container">
   @for (post of posts; track $index){
-  <div class="posts-section__item mh-1" (click)="postClick($index)">
+  <div class="posts-section__item mh-1">
     <a [routerLink]="[post.id]">
       <div class="posts-section__img">
         <img src="{{ post.img }}" alt="" />

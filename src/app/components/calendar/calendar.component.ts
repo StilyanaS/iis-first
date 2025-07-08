@@ -1,7 +1,7 @@
 import { Component, computed, inject, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -54,7 +54,9 @@ export class CalendarComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  handleDate(event: any) {
+  handleDate(event: MatDatepickerInputEvent<Date>) {
+    console.log('this event', event);
+
     this.selectedDate.set(event.value);
   }
 
@@ -131,7 +133,8 @@ export class CalendarComponent implements OnInit {
 
   formatHours() {
     const busySlots = this.slotsData()?.busy || [];
-    const formatted = busySlots.map((slot: any) => {
+    const formatted = busySlots.map((slot: {end: string, start: string}) => {
+
       const start = new Date(slot.start);
       return start.toLocaleTimeString('es-ES', {
         hour: '2-digit',

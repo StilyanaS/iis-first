@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from, forkJoin, of, Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { Storage, ref, getDownloadURL, listAll } from '@angular/fire/storage';
+import { Storage, ref, getDownloadURL, listAll, ListResult, StorageReference } from '@angular/fire/storage';
 
 @Injectable({ providedIn: 'root' })
 export class ImageService {
@@ -10,8 +10,8 @@ export class ImageService {
   getFolderImages(folderPath: string) {
     const folderRef = ref(this.storage, folderPath);
     return from(listAll(folderRef)).pipe(
-      switchMap((result: any) => {
-        const downloadUrlObservables = result.items.map((itemRef: any) =>
+      switchMap((result: ListResult) => {
+        const downloadUrlObservables = result.items.map((itemRef: StorageReference) =>
           from(getDownloadURL(itemRef))
         );
         return forkJoin(downloadUrlObservables);
