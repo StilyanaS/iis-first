@@ -12,6 +12,7 @@ export class ConnectFirebase {
   usersDb = collection(this.firestore, 'users');
   contactsDb = collection(this.firestore, 'contacts');
   serviceDetailsDb = collection(this.firestore, 'services-description');
+  calendarRequestsDb = collection(this.firestore, 'valendar-requests');
 
   getServices(): Observable<any> {
     return collectionData(this.servicesDb, {
@@ -85,6 +86,16 @@ export class ConnectFirebase {
     }).pipe(
       catchError((err) => {
         console.error('Error fetching service details:', err);
+        throw err;
+      })
+    );
+  }
+
+  reserveSlot(data: {name: string, email: string, dateStart: string, hour: string}) {
+    return from(addDoc(this.calendarRequestsDb, data)).pipe(
+      tap((docRef) => console.log('Request created', docRef.id)),
+      catchError((err) => {
+        console.error('Request is not created:', err);
         throw err;
       })
     );

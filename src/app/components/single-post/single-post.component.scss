@@ -1,4 +1,18 @@
 .posts-section{
+  &__img {
+    img {
+      max-width: 100%;
+      border-radius: 4px;
+      aspect-ratio: 16/9;
+      width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+      mask-image: linear-gradient(to bottom, black 70%, transparent);
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+  }
   &__container {
     display: flex;
     gap: 2rem;
@@ -9,17 +23,23 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    max-width: 50%;
   }
   &__title {
     display: flex;
     gap: 1rem;
+    margin-top: -4rem;
   }
   &__content {
     max-width: 90%;
-    max-height: 2.6rem;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
+  ul {
+    list-style-type: square;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
 }
+

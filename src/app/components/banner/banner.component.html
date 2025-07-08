@@ -1,5 +1,5 @@
 @if(imgUrl){
-<div class="banner-container container">
+<div class="banner-container container mh-1">
   <div class="banner__subscription-container">
     <div class="banner__subscription-title">
       <h1 class="gradient-text">
@@ -12,6 +12,7 @@
       it has to be completely personalized and based on bussiness needs.
     </div>
     <div class="banner__subscription-form">
+      @if(!dataSent){
       <form
         action=""
         class=""
@@ -38,12 +39,22 @@
             Let's talk
           </button>
         </div>
+        <p class="banner__accept-privacy">
+          By clicking the button, you agree to our Terms of Service and Privacy
+          Policy.
+        </p>
         @if (email?.touched){ @if (email?.errors?.['required']){
         <p class="error">Email is required!</p>
         } @if (email?.errors?.['realisticEmail']){
         <p class="error">Email is not valid!</p>
         } }
       </form>
+      } @else {
+      <p class="banner__confirm-message">
+        ✅​ We've got your e-mail and will contact you in the next 24 hours.
+        Thank you!
+      </p>
+      }
     </div>
   </div>
   <div class="banner__img-container">

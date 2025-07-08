@@ -13,7 +13,7 @@
     justify-content: center;
     color: #eee;
     gap: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0 0 1rem;
 
     @media screen and (min-width: 960px) {
       gap: 0;
@@ -69,9 +69,19 @@
     border-radius: 5px;
   }
 
+  &__confirm-message {
+    color: #eee;
+    font-size: 1.2rem;
+  }
+
   .img-banner {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    max-width: 60%;
+    @media screen and (min-width: 960px) {
+      max-width: 100%;
+
+    }
   }
   .loaded {
     opacity: 1;
@@ -85,10 +95,10 @@
     }
   }
 
+  &__accept-privacy {
+    margin-top: .5rem;
+  }
+
 }
-.error {
-  color: red;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-}
+
 

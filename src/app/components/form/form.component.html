@@ -1,0 +1,49 @@
+<div class="container">
+  <form class="form" [formGroup]="form()" (ngSubmit)="onSubmit()">
+    <fieldset class="form--fieldset">
+      <div class="form--field field-icon">
+        <label for="email">
+          <span><i class="fas fa-envelope"></i></span>
+        </label>
+        <input
+          id="email"
+          type="email"
+          class="form--input"
+          formControlName="email"
+          placeholder="john.doe@gmail.com"
+        />
+      </div>
+      @if (email()?.touched) { @if (email()?.errors?.['required']) {
+      <p class="error">Email is required!</p>
+      } @if (email()?.errors?.['email']) {
+      <p class="error">Email is not valid!</p>
+      } }
+
+      <div class="form--field field-icon">
+        <label for="name">
+          <span><i class="fas fa-lock"></i></span>
+        </label>
+        <input
+          id="name"
+          type="text"
+          class="form--input"
+          formControlName="name"
+          placeholder="Name"
+        />
+      </div>
+      @if (name()?.touched) { @if (name()?.errors?.['required']) {
+      <p class="error">Name is required!</p>
+      } @if (name()?.errors?.['minlength']) {
+      <p class="error">Name must be at least 5 characters!</p>
+      } }
+
+      <button class="primary-button form-button" type="submit">
+        {{ buttonText }}
+      </button>
+      <p class="form__accept-privacy">
+        By clicking the button, you agree to our Terms of Service and Privacy
+        Policy.
+      </p>
+    </fieldset>
+  </form>
+</div>

@@ -2,6 +2,7 @@
   &__container {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
     margin-top: 4rem;
   }
 
@@ -9,8 +10,10 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    max-width: 50%;
     cursor: pointer;
+    @media screen and (min-width:1025px){
+      max-width: 45%;
+    }
   }
   &__title {
     display: flex;
@@ -21,6 +24,13 @@
     max-height: 2.6rem;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  &__img img{
+    max-width: 100%;
+    border-radius: 4px;
+    aspect-ratio: 16/9;
+    width: 100%;
   }
 
 }
