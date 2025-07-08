@@ -40,6 +40,6 @@ export class SinglePostComponent implements OnInit {
   }
 
   sanitizeContent() {
-    return this.sanitizer.bypassSecurityTrustHtml(this.post?.content);
+    return this.sanitizer.bypassSecurityTrustHtml(this.post.content);
   }
 }
