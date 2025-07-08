@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { LogoCarouselComponent } from '../../components/logo-carousel/logo-carousel.component';
 import { ServiceSectionComponent } from '../../components/service-section/service-section.component';
