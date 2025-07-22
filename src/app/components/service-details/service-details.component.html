@@ -2,10 +2,14 @@
   @for (imgUrl of imageUrls(); track $index){
   <div class="services-details__item mh-1">
     <div class="services-details__img">
-      @if (loading()) {
+      <img
+        src="{{ imgUrl }}"
+        alt=""
+        (load)="onImageLoad()"
+        [style.display]="loaded() ? 'block' : 'none'"
+      />
+      @if (!loaded()) {
       <div class="services-details__placeholder"></div>
-      } @else {
-      <img src="{{ imgUrl }}" alt="" />
       }
     </div>
     <div class="services-details__info">

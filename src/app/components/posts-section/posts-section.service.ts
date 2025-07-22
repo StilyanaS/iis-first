@@ -12,4 +12,7 @@ export class PostsSectionService {
   getPosts(): Observable<[]> {
     return this._initService.getPosts().pipe(tap(console.log));
   }
+  deletePost(id: string): Observable<[]> {
+    return this._initService.deletePost(id).pipe(tap(console.log));
+  }
 }

@@ -11,8 +11,6 @@ import { AsyncPipe } from '@angular/common';
 })
 export class LoaderComponent {
   private readonly loaderService = inject(LoaderService);
-  // Using signal to track loading state
-  // isLoading = signal(false);
   isLoading = this.loaderService.isLoading$;
 
 }
