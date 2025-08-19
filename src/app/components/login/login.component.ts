@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit{
           this._localStorage.setItem('profile', userData);
           this.router.navigate(['/profile']);
           this._authService.login();
+        } else {
+          if (!user.verified) alert('User not verified');
+          if (!(user.email === email)) alert('User not verified');
+          if (!(user.password === password)) alert('User not verified');
         }
       }
     });
