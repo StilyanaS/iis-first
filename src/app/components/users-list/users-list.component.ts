@@ -50,7 +50,7 @@ export class UsersListComponent implements OnInit {
     userName.removeAttribute('readonly');
     userEmail.removeAttribute('readonly');
   }
-  deleteUser(index: any) {
+  deleteUser(index: number) {
     this._initService.deleteUser(this.users[index]).subscribe({
       next: () => console.log('user deleted'),
       error: (error) => console.error('An error ocurred', error),

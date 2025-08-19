@@ -1,0 +1,30 @@
+<div class="calendar__container">
+  <mat-form-field class="example-full-width">
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      (dateInput)="handleDate($event)"
+      [min]="mindate"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  @if (selectedDate()) {
+  <app-slot-panel
+    [selectedDate]="selectedDate"
+    [availableHours]="availableHours"
+    (selectedHour)="reserveSlot($event)"
+  ></app-slot-panel>
+  <app-dialog
+    Date="{{ formattedDate }}"
+    Hour="{{ selectedHour() }}"
+    (confirmedReservation)="requestSlot($event)"
+    [slotCreated]="slotCreated()"
+    [loading]="isLoading"
+  ></app-dialog>
+  }
+</div>

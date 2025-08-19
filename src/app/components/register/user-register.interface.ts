@@ -3,5 +3,6 @@ export interface UserData {
   password: string,
   email: string,
   accountType: string,
-  id?: string
+  id?: string,
+  verified?: boolean
 }

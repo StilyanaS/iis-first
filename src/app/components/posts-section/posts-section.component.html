@@ -1,6 +1,15 @@
 <div class="posts-section__container container">
   @for (post of posts; track $index){
-  <div class="posts-section__item" (click)="postClick($index)">
+  <div class="posts-section__item mh-1">
+    @if (authCheck){
+    <div class="posts-section__edition-container">
+      <button class="primary-button" (click)="viewPost(post.id)">View</button>
+      <button class="primary-button" (click)="editPost(post.id)">Modify</button>
+      <button class="primary-button" (click)="deletePost(post.id)">
+        Delete
+      </button>
+    </div>
+    }
     <a [routerLink]="[post.id]">
       <div class="posts-section__img">
         <img src="{{ post.img }}" alt="" />

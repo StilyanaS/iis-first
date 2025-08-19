@@ -1,3 +1,4 @@
+@if(!authCheck){
 <div class="container">
   <form
     class="login"
@@ -19,12 +20,13 @@
           placeholder="john.doe@gmail.com"
           ngModel
           required
+          [email]="true"
           #email="ngModel"
         />
       </div>
       @if (email?.touched){ @if (email?.errors?.['required']){
       <p class="error">Email is required!</p>
-      } @if (email?.errors?.['emailValidator']){
+      } @if (email?.errors?.['email']){
       <p class="error">Email is not valid!</p>
       } }
       <div class="login--field field-icon">
@@ -57,3 +59,6 @@
     <button class="primary-button" (click)="onClickRegister()">Register</button>
   </p>
 </div>
+} @else {
+<p style="color: white">You are already logged</p>
+}

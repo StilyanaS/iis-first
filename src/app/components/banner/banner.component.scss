@@ -12,8 +12,12 @@
     align-items: center;
     justify-content: center;
     color: #eee;
+    gap: 1rem;
+    margin: 1rem 0 0 1rem;
 
     @media screen and (min-width: 960px) {
+      gap: 0;
+      margin-top: 0;
       max-width: 50%;
     }
   }
@@ -26,6 +30,10 @@
   &__subscription-form {
     width: 100%;
     margin-top: 2rem;
+  }
+
+  &__subscription-form-container {
+    display: flex;
   }
 
   &__subscription-input {
@@ -51,6 +59,7 @@
     border-left: 0;
     border-radius: 0 5px 5px 0;
     padding: 0 1rem;
+    cursor: pointer;
   }
   &__placeholder {
     width: 32vw;
@@ -60,13 +69,36 @@
     border-radius: 5px;
   }
 
+  &__confirm-message {
+    color: #eee;
+    font-size: 1.2rem;
+  }
+
   .img-banner {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    max-width: 60%;
+    @media screen and (min-width: 960px) {
+      max-width: 100%;
+
+    }
   }
   .loaded {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
   }
+
+  &__img-container {
+    max-width: 100%;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__accept-privacy {
+    margin-top: .5rem;
+  }
+
 }
+
 

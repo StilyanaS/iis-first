@@ -9,12 +9,17 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { ErrorComponent } from './views/error/error.component';
 import { AuthGuard } from './guards/user.guard';
+import { ServicesComponent } from './views/services/services.component';
+import { ContactComponent } from './views/contact/contact.component';
+import { updatePostComponent } from './views/updatePost/updatePost.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
-    path: '', component: HomeComponent  },
-  { path: 'services', component: HomeComponent },
+    path: '',
+    component: HomeComponent,
+  },
+  { path: 'services', component: ServicesComponent },
   { path: 'createPost', component: createPostComponent },
   { path: 'authentication', component: UserAuthComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
@@ -29,5 +34,18 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'updatePost',
+    children: [
+      { path: '', component: ErrorComponent },
+      {
+        path: ':themeId',
+        component: updatePostComponent,
+        pathMatch: 'full'
+      },
+      { path: '**', component: ErrorComponent }
+    ],
+  },
+  { path: 'calendar', component: ContactComponent },
   { path: '**', component: ErrorComponent },
 ];

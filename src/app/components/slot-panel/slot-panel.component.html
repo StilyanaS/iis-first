@@ -1,0 +1,12 @@
+<div class="slot-panel">
+  <h3>Availability {{ selectedDate() | date : "fullDate" }}</h3>
+  <ul class="slot-list">
+    @for (hour of availableHours(); track hour) {
+    <li>
+      <button (click)="getHour(hour)" class="slot-button">
+        Reserve slot at {{ hour }}
+      </button>
+    </li>
+    }
+  </ul>
+</div>

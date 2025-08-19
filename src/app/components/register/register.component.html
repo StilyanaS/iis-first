@@ -20,12 +20,13 @@
           placeholder="john.doe@gmail.com"
           ngModel
           required
+          [email]="true"
           #email="ngModel"
         />
       </div>
       @if (email?.touched){ @if (email?.errors?.['required']){
       <p class="error">Email is required!</p>
-      } @if (email?.errors?.['emailValidator']){
+      } @if (email?.errors?.['email']){
       <p class="error">Email is not valid!</p>
       } }
 
@@ -75,7 +76,9 @@
       <p class="error">Password must be at least 4 characters!</p>
       } }
 
-      <button class="primary-button form-button">Create</button>
+      <button class="primary-button form-button" [disabled]="form.invalid">
+        Create
+      </button>
     </fieldset>
   </form>
   <p class="text-center">

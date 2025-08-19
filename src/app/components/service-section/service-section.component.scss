@@ -12,6 +12,9 @@
     gap: 3rem;
     flex-wrap: wrap;
     margin-top: 2rem;
+    @media screen and (min-width: 1025px) {
+      flex-wrap: nowrap;
+    }
   }
   &__subitem {
     display: flex;

@@ -1,7 +1,8 @@
+@if (!created){
 <form
   class="post"
   #form="ngForm"
-  (ngSubmit)="addPost(title.value, content.value)"
+  (ngSubmit)="addPost(title.value, content.value, img.value)"
 >
   <fieldset class="post--fieldset">
     <h2 class="post--title">Post to add</h2>
@@ -54,3 +55,6 @@
     <button class="primary-button post--button">Post it</button>
   </fieldset>
 </form>
+} @else {
+<p class="post__confirm-message">✅​ You just created a new post! Thank you!</p>
+}
