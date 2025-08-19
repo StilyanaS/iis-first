@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BannerService } from './banner.service';
 import { FormsModule } from '@angular/forms';
 import { RealisticEmailValidatorDirective } from '../../directives/emailValidator.directive';
@@ -10,7 +10,7 @@ import { RealisticEmailValidatorDirective } from '../../directives/emailValidato
   styleUrls: ['./banner.component.scss', '../../../assets/commons.scss'],
 })
 export class BannerComponent {
-  loaded = false;
+  loaded = signal(false);
   imgUrl =
     'https://firebasestorage.googleapis.com/v0/b/aiscape-xs6rh.firebasestorage.app/o/robot-ind.13f306da5b059143e54b%20(2).png?alt=media&token=82bdc94c-38d1-42fb-90bd-05b43b04ea8d';
   dataSent: boolean = false;
@@ -30,6 +30,6 @@ export class BannerComponent {
     });
   }
   onImageLoad() {
-    this.loaded = true;
+    this.loaded.set(true);
   }
 }

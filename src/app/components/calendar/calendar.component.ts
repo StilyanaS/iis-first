@@ -81,7 +81,6 @@ export class CalendarComponent implements OnInit {
     if (!date) return;
     this.selectedHour.set(hour);
     this.slotsDialog.openDialog();
-    //this.getSlots();
   }
 
   requestSlot(data: Form) {

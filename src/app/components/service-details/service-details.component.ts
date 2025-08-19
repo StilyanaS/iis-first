@@ -23,7 +23,7 @@ export class ServiceDetailsComponent implements OnInit {
   loading: WritableSignal<boolean> = signal(true);
   error: WritableSignal<HttpErrorResponse | null> = signal(null);
   loaderService = inject(LoaderService);
-
+  loaded= signal(false);
   constructor(
     private imageService: ImageService,
     private serviceDescription: ServiceDetailsService
@@ -66,5 +66,9 @@ export class ServiceDetailsComponent implements OnInit {
         this.error.set(err);
       },
     });
+  }
+
+  onImageLoad() {
+    this.loaded.set(true);
   }
 }

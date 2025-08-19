@@ -1,3 +1,4 @@
+@if(!authCheck){
 <div class="container">
   <form
     class="login"
@@ -58,3 +59,6 @@
     <button class="primary-button" (click)="onClickRegister()">Register</button>
   </p>
 </div>
+} @else {
+<p style="color: white">You are already logged</p>
+}
