@@ -7,9 +7,12 @@ A modern Angular 18 web application featuring:
 - Responsive design with Angular Material and custom SCSS
 
 ---
+## Preview
 
+You can access the app preview on this link:
+https://9000-firebase-integratedsystems-1752053112120.cluster-ombtxv25tbd6yrjpp3lukp6zhc.cloudworkstations.dev/?monospaceUid=875042&embedded=0
+---
 ## Table of Contents
-
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -43,31 +46,6 @@ A modern Angular 18 web application featuring:
 - [Firebase](https://firebase.google.com/)
 - [RxJS](https://rxjs.dev/)
 - [SCSS](https://sass-lang.com/)
-
----
-
-## Project Structure
-
-```
-src/app/
-  components/
-    banner/
-    calendar/
-    header/
-    footer/
-    loader/
-    service-details/
-  services/
-    image.service.ts
-    ...
-  views/
-    services/
-  directives/
-    emailValidator.directive.ts
-  guards/
-    user.guard.ts
-  ...
-```
 
 ---
 
@@ -119,29 +97,6 @@ src/app/
 
 **Realistic Email Validator**  
 Ensures the email contains a dot in the domain (e.g., `user@domain.com`).
-
-```typescript
-@Directive({
-  selector: '[realisticEmail]',
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: RealisticEmailValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class RealisticEmailValidatorDirective implements Validator {
-  validate(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    return value && /^[^@]+@[^@]+\.[^@]+$/.test(value)
-      ? null
-      : { realisticEmail: true };
-  }
-}
-```
-
 ---
 
 ## Troubleshooting
@@ -162,13 +117,7 @@ export class RealisticEmailValidatorDirective implements Validator {
 - **ngModel Errors**:  
   Ensure `FormsModule` is imported in any standalone component using `ngModel`.
 
----
-
-## License
-
-MIT
 
 ---
 
 **Made with Angular 18, Firebase, and ❤️**
-
